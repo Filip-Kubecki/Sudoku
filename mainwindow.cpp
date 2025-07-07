@@ -14,9 +14,9 @@
 
 using namespace std;
 
-const int buttonSize = 40;
+const int buttonSize = 80;
 const float buttonSpacing = 1.08;
-const int boardSpacing = 3;
+const int boardSpacing = 5;
 int difficultyLevel = 20;
 
 SudokuGame *gameInstance = new SudokuGame();
@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui -> setupUi(this);
     this -> setFocusPolicy( Qt::StrongFocus );
 
-    this -> setFixedSize(buttonSpacing*500+(boardSpacing*2), buttonSpacing*buttonSize*9+(boardSpacing*2));
+    this -> setFixedSize(buttonSpacing*1000+(boardSpacing*2), buttonSpacing*buttonSize*9+(boardSpacing*2));
 
     //Creating board
     int number = 0;
@@ -87,39 +87,42 @@ MainWindow::MainWindow(QWidget *parent)
             button -> setFont(font);
 
             button -> setText(QString::number(number));
-            button -> setGeometry((buttonSize+10)*y+80+(314), (buttonSize+10)*x+20, buttonSize+10, buttonSize+10);
+            button -> setGeometry((buttonSize+10)*y+80+(725), (buttonSize+10)*x+20, buttonSize+10, buttonSize+10);
             QObject::connect(button,&QPushButton::clicked,this,&MainWindow::setBoardValue);
             number--;
         }
     }
 
+    const int button_padding = 10;
+    const int button_start_y = 320;
+    const int button_spacing = 80;
     //Generate Button
     QPushButton *generateButton = new QPushButton(this);
     generateButton -> setText("Generate");
-    generateButton -> setGeometry(buttonSize*10, 180, buttonSize*3+20, buttonSize);
+    generateButton -> setGeometry(buttonSize*10+(button_padding), button_start_y, buttonSize*3+20, buttonSize);
     QObject::connect(generateButton, &QPushButton::clicked,this,&MainWindow::generateBoard);
 
     //Clear Button
     QPushButton *clearButton = new QPushButton(this);
     clearButton -> setText("Clear");
-    clearButton -> setGeometry(buttonSize*10, 230, buttonSize*3+20, buttonSize);
+    clearButton -> setGeometry(buttonSize*10+(button_padding), button_start_y+button_spacing, buttonSize*3+20, buttonSize);
     QObject::connect(clearButton, &QPushButton::clicked,this,&MainWindow::clearBoard);
 
     //Difficulty level Label
     QPushButton *showSolution = new QPushButton(this);
     showSolution -> setText("Solution");
-    showSolution -> setGeometry(buttonSize*10, 280, buttonSize*3+20, buttonSize);
+    showSolution -> setGeometry(buttonSize*10+(button_padding), button_start_y+(2*button_spacing), buttonSize*3+20, buttonSize);
     QObject::connect(showSolution, &QPushButton::clicked,this,&MainWindow::showPosibleSolution);
 
     //Difficulty level Label
     QLabel *difficultyLabel = new QLabel(this);
     difficultyLabel -> setText("Difficulty:");
-    difficultyLabel -> setGeometry(buttonSize*10+20, 320, buttonSize*2, buttonSize);
+    difficultyLabel -> setGeometry(buttonSize*10+20, button_start_y+(3*button_spacing), buttonSize*2, buttonSize);
 
 
     //Difficulty level Slider
     QSlider *levelSlider = new QSlider(this);
-    levelSlider -> setGeometry(buttonSize*10+10, 340, buttonSize*3, buttonSize);
+    levelSlider -> setGeometry(buttonSize*10+10, button_start_y+(3*button_spacing)+20, buttonSize*3, buttonSize);
     levelSlider -> setOrientation(Qt::Horizontal);
     levelSlider -> setMinimum(2);
     levelSlider -> setMaximum(40);

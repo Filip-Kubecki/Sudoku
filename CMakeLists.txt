@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.5)
 
 project(Sudoku VERSION 0.1 LANGUAGES CXX)
 
+set( CMAKE_BUILD_TYPE Debug )
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_PREFIX_PATH "C:\\Qt\\6.9.1\\mingw_64")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,10 +27,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         sudokugame.h sudokugame.cpp
         qwinnerpopup.h qwinnerpopup.cpp qwinnerpopup.ui
-
-
-
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Sudoku APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
